@@ -16,34 +16,7 @@ struct SelectView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 30) {
                 NavigationLink(isActive: $pickerIsSelected) {
-                    List {
-                        Text("A")
-                        Text("B")
-                        Text("C")
-                        Text("D")
-                        Text("E")
-                        Text("F")
-                        Text("G")
-                        Text("H")
-                        Text("I")
-                        Text("J")
-                        Text("K")
-                        Text("L")
-                        Text("M")
-                        Text("N")
-                        Text("O")
-                        Text("P")
-                        Text("Q")
-                        Text("R")
-                        Text("S")
-                        Text("T")
-                        Text("U")
-                        Text("V")
-                        Text("W")
-                        Text("X")
-                        Text("Y")
-                        Text("Z")
-                    }
+                    LettersView()
                     
                 } label: {
                     Button {

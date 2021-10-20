@@ -11,6 +11,11 @@
 		C442C6A02719E70500D5D0FD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442C69F2719E70500D5D0FD /* ContentView.swift */; };
 		C442C6A22719E70800D5D0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C442C6A12719E70800D5D0FD /* Assets.xcassets */; };
 		C442C6A52719E70800D5D0FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C442C6A42719E70800D5D0FD /* Preview Assets.xcassets */; };
+		C4701FD9272053C20032170A /* LettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FD8272053C20032170A /* LettersView.swift */; };
+		C4701FDB27205F560032170A /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FDA27205F560032170A /* DetailsView.swift */; };
+		C4701FE22720674C0032170A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FE12720674C0032170A /* NetworkManager.swift */; };
+		C4701FE4272067AE0032170A /* CocktailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FE3272067AE0032170A /* CocktailData.swift */; };
+		C4701FE72720768D0032170A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C4701FE62720768D0032170A /* SDWebImageSwiftUI */; };
 		C49C47CB271DBEF7007C0357 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C47CA271DBEF7007C0357 /* SelectView.swift */; };
 		C49C47CD271DC212007C0357 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C47CC271DC212007C0357 /* ResultsView.swift */; };
 /* End PBXBuildFile section */
@@ -21,6 +26,10 @@
 		C442C69F2719E70500D5D0FD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C442C6A12719E70800D5D0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C442C6A42719E70800D5D0FD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4701FD8272053C20032170A /* LettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LettersView.swift; sourceTree = "<group>"; };
+		C4701FDA27205F560032170A /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		C4701FE12720674C0032170A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C4701FE3272067AE0032170A /* CocktailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailData.swift; sourceTree = "<group>"; };
 		C49C47CA271DBEF7007C0357 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		C49C47CC271DC212007C0357 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -30,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4701FE72720768D0032170A /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,10 +65,9 @@
 		C442C69C2719E70500D5D0FD /* Cocktail Heaven */ = {
 			isa = PBXGroup;
 			children = (
+				C4701FE0272067390032170A /* Models */,
 				C442C69D2719E70500D5D0FD /* Cocktail_HeavenApp.swift */,
-				C442C69F2719E70500D5D0FD /* ContentView.swift */,
-				C49C47CA271DBEF7007C0357 /* SelectView.swift */,
-				C49C47CC271DC212007C0357 /* ResultsView.swift */,
+				C4701FDC27205FCE0032170A /* Views */,
 				C442C6A12719E70800D5D0FD /* Assets.xcassets */,
 				C442C6A32719E70800D5D0FD /* Preview Content */,
 			);
@@ -71,6 +80,27 @@
 				C442C6A42719E70800D5D0FD /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C4701FDC27205FCE0032170A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C442C69F2719E70500D5D0FD /* ContentView.swift */,
+				C49C47CA271DBEF7007C0357 /* SelectView.swift */,
+				C49C47CC271DC212007C0357 /* ResultsView.swift */,
+				C4701FD8272053C20032170A /* LettersView.swift */,
+				C4701FDA27205F560032170A /* DetailsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C4701FE0272067390032170A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4701FE12720674C0032170A /* NetworkManager.swift */,
+				C4701FE3272067AE0032170A /* CocktailData.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +119,9 @@
 			dependencies = (
 			);
 			name = "Cocktail Heaven";
+			packageProductDependencies = (
+				C4701FE62720768D0032170A /* SDWebImageSwiftUI */,
+			);
 			productName = "Cocktail Heaven";
 			productReference = C442C69A2719E70500D5D0FD /* Cocktail Heaven.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +150,9 @@
 				Base,
 			);
 			mainGroup = C442C6912719E70500D5D0FD;
+			packageReferences = (
+				C4701FE52720768D0032170A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = C442C69B2719E70500D5D0FD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -144,9 +180,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C442C6A02719E70500D5D0FD /* ContentView.swift in Sources */,
+				C4701FE4272067AE0032170A /* CocktailData.swift in Sources */,
 				C49C47CD271DC212007C0357 /* ResultsView.swift in Sources */,
+				C4701FD9272053C20032170A /* LettersView.swift in Sources */,
 				C442C69E2719E70500D5D0FD /* Cocktail_HeavenApp.swift in Sources */,
 				C49C47CB271DBEF7007C0357 /* SelectView.swift in Sources */,
+				C4701FDB27205F560032170A /* DetailsView.swift in Sources */,
+				C4701FE22720674C0032170A /* NetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +391,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C4701FE52720768D0032170A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C4701FE62720768D0032170A /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C4701FE52720768D0032170A /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C442C6922719E70500D5D0FD /* Project object */;
 }
