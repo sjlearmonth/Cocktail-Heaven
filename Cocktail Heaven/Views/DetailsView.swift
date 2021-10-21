@@ -12,26 +12,31 @@ struct DetailsView: View {
     
     @ObservedObject var networkManager = NetworkManager()
     
+    lazy var ingredients = networkManager.buildIngredients()
     let urlString: String
     
     var body: some View {
         List(networkManager.cocktails) { cocktail in
-            VStack(alignment: .center, spacing: 10.0) {
-                HStack(alignment: .center, spacing: 10) {
-                    Text(cocktail.strDrink)
+            VStack(alignment: .center) {
+                HStack(alignment: .center) {
+                    Text(cocktail.strDrink + "  -")
                         .navigationTitle("Cocktail by first letter")
+                        .frame(alignment: .center)
                     Text(cocktail.strAlcoholic)
+                        .frame(alignment: .center)
                 }
-                VStack(alignment: .center, spacing: 10.0) {
-                    WebImage(url: URL(string: cocktail.strDrinkThumb))
-                        .resizable()
-                        .frame(width: 200, height: 200, alignment: .center)
-                    List {
-                        
-                    }
+                
+                WebImage(url: URL(string: cocktail.strDrinkThumb))
+                    .resizable()
+                    .frame(width: 200, height: 200, alignment: .center)
+                
+                Text("Ingredients List").frame(alignment: .center)
+                ForEach(ingredients, id: \.self) { ingredient in
+                    Text(ingredient)
                 }
             }
         }
+        
         .onAppear {
             self.networkManager.fetchData(urlString)
         }
