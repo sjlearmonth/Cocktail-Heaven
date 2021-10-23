@@ -12,11 +12,12 @@ struct DetailsView: View {
     
     @ObservedObject var networkManager = NetworkManager()
     
-    lazy var ingredients = networkManager.buildIngredients()
     let urlString: String
     
     var body: some View {
+        
         List(networkManager.cocktails) { cocktail in
+
             VStack(alignment: .center) {
                 HStack(alignment: .center) {
                     Text(cocktail.strDrink + "  -")
@@ -28,12 +29,18 @@ struct DetailsView: View {
                 
                 WebImage(url: URL(string: cocktail.strDrinkThumb))
                     .resizable()
-                    .frame(width: 200, height: 200, alignment: .center)
+                    .frame(width: UIScreen.main.bounds.width - 20.0, height: UIScreen.main.bounds.width - 20.0, alignment: .center)
+                    
                 
-                Text("Ingredients List").frame(alignment: .center)
-                ForEach(ingredients, id: \.self) { ingredient in
+                Text("~ Ingredients List ~\n").frame(alignment: .center)
+                
+                ForEach(networkManager.buildIngredients(cocktail), id: \.self) { ingredient in
                     Text(ingredient)
                 }
+                
+                Text("\n~ Recipe Instructions ~\n\n")
+                
+                Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
             }
         }
         
@@ -48,3 +55,4 @@ struct DetailsView_Previews: PreviewProvider {
         DetailsView(urlString: "www.google.com")
     }
 }
+
