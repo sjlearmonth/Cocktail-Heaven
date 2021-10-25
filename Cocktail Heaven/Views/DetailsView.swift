@@ -41,7 +41,11 @@ struct DetailsView: View {
                 Text("\n~ Recipe Instructions ~\n\n")
                 
                 Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
+                
+                
             }
+            
+            
         }
         
         .onAppear {

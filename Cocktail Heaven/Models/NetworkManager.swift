@@ -6,10 +6,13 @@
 //
 
 import Foundation
+import UIKit
+import SwiftUI
 
 class NetworkManager: ObservableObject {
     
     @Published var cocktails = [Cocktail]()
+    @Published var noDataFound = false
     
     func fetchData(_ urlString: String) {
         guard let url = URL(string: urlString) else { return }
@@ -24,9 +27,19 @@ class NetworkManager: ObservableObject {
                         self.cocktails = results.drinks
                     }
                 } catch let error {
-                    print(error)
+                    print(error.localizedDescription)
+                    if error.localizedDescription == "The data couldn’t be read because it is missing." {
+                        DispatchQueue.main.async {
+                            self.noDataFound = true
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.noDataFound = false
+                        }
+                    }
                 }
             }
+            print(self.cocktails)
         }
         task.resume()
     }

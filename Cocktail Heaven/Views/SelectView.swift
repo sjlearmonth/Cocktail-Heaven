@@ -9,18 +9,19 @@ import SwiftUI
 
 struct SelectView: View {
     @State var resultsIsSelected = false
-    @State var pickerIsSelected = false
+    @State var firstLetterIsSelected = false
+    @State var nameIsSelected = false
     var body: some View {
         ZStack {
             Color(.systemTeal)
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 30) {
-                NavigationLink(isActive: $pickerIsSelected) {
+                NavigationLink(isActive: $firstLetterIsSelected) {
                     LettersView()
                     
                 } label: {
                     Button {
-                        pickerIsSelected = true
+                        firstLetterIsSelected = true
                     } label: {
                         Text("Search by first letter")
                             .foregroundColor(.white)
@@ -34,11 +35,11 @@ struct SelectView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 30.0))
                 }
                 
-                NavigationLink(isActive: $resultsIsSelected) {
-                    ResultsView()
+                NavigationLink(isActive: $nameIsSelected) {
+                    NameView()
                 } label: {
                     Button {
-                        resultsIsSelected = true
+                        nameIsSelected = true
                     } label: {
                         Text("Search by cocktail name")
                             .foregroundColor(.white)
