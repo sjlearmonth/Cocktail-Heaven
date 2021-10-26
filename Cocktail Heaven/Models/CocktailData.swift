@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Drink: Decodable {
-    var drinks: [Cocktail]
+struct Drinks: Decodable {
+    var cocktails: [Cocktail]
 }
 
 struct Cocktail: Decodable, Identifiable {

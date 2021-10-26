@@ -10,13 +10,11 @@ import SDWebImageSwiftUI
 
 struct DetailsView: View {
     
-    @ObservedObject var networkManager = NetworkManager()
-    
-    let urlString: String
+    @StateObject var viewModel = ViewModel(urlString: "")
     
     var body: some View {
         
-        List(networkManager.cocktails) { cocktail in
+        List(viewModel.drinks.cocktails) { cocktail in
 
             VStack(alignment: .center) {
                 HStack(alignment: .center) {
@@ -34,29 +32,21 @@ struct DetailsView: View {
                 
                 Text("~ Ingredients List ~\n").frame(alignment: .center)
                 
-                ForEach(networkManager.buildIngredients(cocktail), id: \.self) { ingredient in
+                ForEach(viewModel.buildIngredients(cocktail), id: \.self) { ingredient in
                     Text(ingredient)
                 }
                 
                 Text("\n~ Recipe Instructions ~\n\n")
                 
                 Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
-                
-                
             }
-            
-            
-        }
-        
-        .onAppear {
-            self.networkManager.fetchData(urlString)
         }
     }
 }
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsView(urlString: "www.google.com")
+        DetailsView(viewModel: ViewModel(urlString: "www.google.com"))
     }
 }
 

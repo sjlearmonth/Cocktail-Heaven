@@ -22,8 +22,12 @@ struct NameView: View {
             TextField("Cocktail name", text: $enteredText)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 250.0, height: 60.0, alignment: .center)
+                .padding()
+                .background(.white)
+                .foregroundColor(.white)
+                .cornerRadius(30.0)
             NavigationLink(isActive: $nameIsEntered) {
-                DetailsView(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredText)")
+                DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredText)"))
             } label: {
                 EmptyView()
             }
@@ -39,7 +43,7 @@ struct NameView: View {
             }
             .background(.blue)
             .clipShape(RoundedRectangle(cornerRadius: 30.0))
-            
+
         }
     }
 }

@@ -14,7 +14,7 @@ struct LettersView: View {
     var body: some View {
         
         List(letters, id: \.self) { letter in
-            NavigationLink(destination: DetailsView(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)")) {
+            NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)"))) {
                 Text("\(letter)")
                     .fontWeight(.bold)
             }
