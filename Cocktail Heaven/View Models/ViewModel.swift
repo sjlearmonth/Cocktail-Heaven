@@ -7,12 +7,12 @@
 
 import Foundation
 
-class ViewModel: ObservableObject {
+class ViewModel {
     
     let networkManager = NetworkManager()
     var urlString: String
-    @Published var drinks: Drinks = Drinks(cocktails: [Cocktail]())
-    @Published var dataIsFound: Bool = true
+    var drinks: Drinks = Drinks(drinks: [Cocktail]())
+    var dataIsFound: Bool = true
     
     init(urlString: String) {
         self.urlString = urlString

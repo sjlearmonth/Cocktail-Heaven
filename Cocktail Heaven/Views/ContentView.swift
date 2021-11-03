@@ -31,14 +31,37 @@ struct ContentView: View {
                             .fontWeight(.bold)
                             .foregroundColor(.white)
                     }
-
-                    
                 }
             }
         }
         .accentColor(.white)
+        .background(UINavigationConfiguration { nc in
+                        nc.navigationBar.barTintColor = .systemTeal
+                        nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+                    })
     }
 }
+
+struct UINavigationConfiguration: UIViewControllerRepresentable {
+    var config: (UINavigationController) -> Void = {_ in }
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        let controller = UIViewController()
+        DispatchQueue.main.async {
+            if let nc = controller.navigationController {
+                self.config(nc)
+            }
+        }
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    }
+}
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

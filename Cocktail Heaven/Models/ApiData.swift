@@ -1,5 +1,5 @@
 //
-//  CocktailData.swift
+//  ApiData.swift
 //  Cocktail Heaven
 //
 //  Created by Stephen Learmonth on 20/10/2021.
@@ -8,7 +8,7 @@
 import Foundation
 
 struct Drinks: Decodable {
-    var cocktails: [Cocktail]
+    var drinks: [Cocktail]
 }
 
 struct Cocktail: Decodable, Identifiable {
@@ -33,4 +33,20 @@ struct Cocktail: Decodable, Identifiable {
     let strIngredient10: String?
     let strIngredient11: String?
     let strIngredient12: String?
+}
+
+struct Ingredients: Decodable {
+    var ingredients: [Ingredient]
+}
+
+struct Ingredient: Decodable, Identifiable {
+    var id: String {
+        return idIngredient
+    }
+    let idIngredient: String
+    let strIngredient: String
+    let strAlcohol: String
+    let strDescription: String
+    let strABV: String
+    let strType: String
 }

@@ -12,11 +12,16 @@ struct LettersView: View {
     var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0)}
     
     var body: some View {
-        
-        List(letters, id: \.self) { letter in
-            NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)"))) {
-                Text("\(letter)")
-                    .fontWeight(.bold)
+        ZStack {
+            Color(.systemTeal)
+                .edgesIgnoringSafeArea(.all)
+            
+            List(letters, id: \.self) { letter in
+                NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)"))) {
+                    Text("\(letter)")
+                        .fontWeight(.bold)
+                }
+                
             }
         }
     }

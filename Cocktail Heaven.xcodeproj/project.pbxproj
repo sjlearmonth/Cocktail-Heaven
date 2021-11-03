@@ -15,10 +15,11 @@
 		C4701FD9272053C20032170A /* LettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FD8272053C20032170A /* LettersView.swift */; };
 		C4701FDB27205F560032170A /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FDA27205F560032170A /* DetailsView.swift */; };
 		C4701FE22720674C0032170A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FE12720674C0032170A /* NetworkManager.swift */; };
-		C4701FE4272067AE0032170A /* CocktailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FE3272067AE0032170A /* CocktailData.swift */; };
+		C4701FE4272067AE0032170A /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4701FE3272067AE0032170A /* ApiData.swift */; };
 		C4701FE72720768D0032170A /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = C4701FE62720768D0032170A /* SDWebImageSwiftUI */; };
 		C49C47CB271DBEF7007C0357 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C47CA271DBEF7007C0357 /* SelectView.swift */; };
 		C49C47CD271DC212007C0357 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C49C47CC271DC212007C0357 /* ResultsView.swift */; };
+		C4A424122732F97300856A14 /* IngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A424112732F97300856A14 /* IngredientView.swift */; };
 		C4C3827B2726E6A7001D3464 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C3827A2726E6A7001D3464 /* NameView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,9 +33,10 @@
 		C4701FD8272053C20032170A /* LettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LettersView.swift; sourceTree = "<group>"; };
 		C4701FDA27205F560032170A /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		C4701FE12720674C0032170A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		C4701FE3272067AE0032170A /* CocktailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailData.swift; sourceTree = "<group>"; };
+		C4701FE3272067AE0032170A /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		C49C47CA271DBEF7007C0357 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 		C49C47CC271DC212007C0357 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		C4A424112732F97300856A14 /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
 		C4C3827A2726E6A7001D3464 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				C4701FD8272053C20032170A /* LettersView.swift */,
 				C4701FDA27205F560032170A /* DetailsView.swift */,
 				C4C3827A2726E6A7001D3464 /* NameView.swift */,
+				C4A424112732F97300856A14 /* IngredientView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -112,7 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				C4701FE12720674C0032170A /* NetworkManager.swift */,
-				C4701FE3272067AE0032170A /* CocktailData.swift */,
+				C4701FE3272067AE0032170A /* ApiData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,10 +198,11 @@
 			files = (
 				C46C56992728386300C49F63 /* ViewModel.swift in Sources */,
 				C442C6A02719E70500D5D0FD /* ContentView.swift in Sources */,
-				C4701FE4272067AE0032170A /* CocktailData.swift in Sources */,
+				C4701FE4272067AE0032170A /* ApiData.swift in Sources */,
 				C4C3827B2726E6A7001D3464 /* NameView.swift in Sources */,
 				C49C47CD271DC212007C0357 /* ResultsView.swift in Sources */,
 				C4701FD9272053C20032170A /* LettersView.swift in Sources */,
+				C4A424122732F97300856A14 /* IngredientView.swift in Sources */,
 				C442C69E2719E70500D5D0FD /* Cocktail_HeavenApp.swift in Sources */,
 				C49C47CB271DBEF7007C0357 /* SelectView.swift in Sources */,
 				C4701FDB27205F560032170A /* DetailsView.swift in Sources */,

@@ -7,24 +7,23 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager<DataStruct: Decodable> {
         
-    func fetchData(_ urlString: String, completion: @escaping (Drinks, Bool) -> Void) {
+    func fetchData(_ urlString: String, completion: @escaping (DataStruct?, Bool) -> Void) {
         guard let url = URL(string: urlString) else { return }
-        print(urlString)
-        var drinks: Drinks?
+        var drinkData: DataStruct?
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { data, response, error in
             if error == nil {
                 let decoder = JSONDecoder()
                 guard let safeData = data else { return }
                 do {
-                    drinks = try decoder.decode(Drinks.self, from: safeData)
-                        completion(drinks!, false)
+                    drinkData = try decoder.decode(DataStruct.self, from: safeData)
+                        completion(drinkData!, false)
                 } catch let error {
-                    print(error.localizedDescription)
                     if error.localizedDescription == "The data couldn’t be read because it is missing." {
-                            completion(drinks ?? Drinks(cocktails: [Cocktail]()), true)
+                        
+                        completion(drinkData, true)
                     } else {
                         print(error.localizedDescription)
                     }

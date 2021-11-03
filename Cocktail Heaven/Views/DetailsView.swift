@@ -7,19 +7,18 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import UIKit
 
 struct DetailsView: View {
     
-    @StateObject var viewModel = ViewModel(urlString: "")
+    var viewModel: ViewModel
     
     var body: some View {
         
-        List(viewModel.drinks.cocktails) { cocktail in
-
+        List(viewModel.drinks.drinks) { cocktail in
             VStack(alignment: .center) {
                 HStack(alignment: .center) {
                     Text(cocktail.strDrink + "  -")
-                        .navigationTitle("Cocktail by first letter")
                         .frame(alignment: .center)
                     Text(cocktail.strAlcoholic)
                         .frame(alignment: .center)
@@ -28,7 +27,7 @@ struct DetailsView: View {
                 WebImage(url: URL(string: cocktail.strDrinkThumb))
                     .resizable()
                     .frame(width: UIScreen.main.bounds.width - 20.0, height: UIScreen.main.bounds.width - 20.0, alignment: .center)
-                    
+                
                 
                 Text("~ Ingredients List ~\n").frame(alignment: .center)
                 
@@ -40,9 +39,14 @@ struct DetailsView: View {
                 
                 Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
             }
+            
         }
+        .foregroundColor(Color.blue)
     }
 }
+
+
+
 
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {

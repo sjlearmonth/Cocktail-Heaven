@@ -11,14 +11,15 @@ struct SelectView: View {
     @State var resultsIsSelected = false
     @State var firstLetterIsSelected = false
     @State var nameIsSelected = false
+    @State var ingredientIsSelected = false
     var body: some View {
         ZStack {
             Color(.systemTeal)
                 .edgesIgnoringSafeArea(.all)
             VStack(spacing: 30) {
+                
                 NavigationLink(isActive: $firstLetterIsSelected) {
                     LettersView()
-                    
                 } label: {
                     Button {
                         firstLetterIsSelected = true
@@ -51,11 +52,11 @@ struct SelectView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 30.0))
                 }
                 
-                NavigationLink(isActive: $resultsIsSelected) {
-                    ResultsView()
+                NavigationLink(isActive: $ingredientIsSelected) {
+                    IngredientView()
                 } label: {
                     Button {
-                        resultsIsSelected = true
+                        ingredientIsSelected = true
                     } label: {
                         Text("Search by ingredient")
                             .foregroundColor(.white)
@@ -86,6 +87,14 @@ struct SelectView: View {
         }
     }
 }
+
+
+
+
+
+
+
+
 
 struct SelectView_Previews: PreviewProvider {
     static var previews: some View {
