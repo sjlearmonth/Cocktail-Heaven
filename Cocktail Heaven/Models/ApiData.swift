@@ -45,8 +45,22 @@ struct Ingredient: Decodable, Identifiable {
     }
     let idIngredient: String
     let strIngredient: String
-    let strAlcohol: String
+    let strAlcohol: String?
     let strDescription: String
-    let strABV: String
+    let strABV: String?
     let strType: String
 }
+
+struct Alcohols : Decodable {
+    let drinks: [Alcohol]
+}
+
+struct Alcohol: Decodable, Identifiable {
+    var id: String {
+        return idDrink
+    }
+    let idDrink: String
+    let strDrink: String
+    let strDrinkThumb: String
+}
+

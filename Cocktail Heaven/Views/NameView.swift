@@ -29,7 +29,7 @@ struct NameView: View {
                     .padding()
                     .foregroundColor(.black)
                 NavigationLink(isActive: $nameIsEntered) {
-                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredText)"))
+                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredText)", dataType: "Drinks"))
                 } label: {
                     EmptyView()
                 }

@@ -12,6 +12,8 @@ struct SelectView: View {
     @State var firstLetterIsSelected = false
     @State var nameIsSelected = false
     @State var ingredientIsSelected = false
+    @State var alcoholIsSelected = false
+    
     var body: some View {
         ZStack {
             Color(.systemTeal)
@@ -68,11 +70,11 @@ struct SelectView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 30.0))
                 }
                 
-                NavigationLink(isActive: $resultsIsSelected) {
-                    ResultsView()
+                NavigationLink(isActive: $alcoholIsSelected) {
+                    AlcoholView()
                 } label: {
                     Button {
-                        resultsIsSelected = true
+                        alcoholIsSelected = true
                     } label: {
                         Text("Search by alcohol content")
                             .foregroundColor(.white)

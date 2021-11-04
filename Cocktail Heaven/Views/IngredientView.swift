@@ -13,7 +13,6 @@ struct IngredientView: View {
     @State var ingredientIsEntered: Bool = false
     
     var body: some View {
-        
         ZStack {
             Color(.systemTeal)
                 .edgesIgnoringSafeArea(.all)
@@ -31,14 +30,14 @@ struct IngredientView: View {
                     .padding()
                     .foregroundColor(.black)
                 NavigationLink(isActive: $ingredientIsEntered) {
-                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka"))
-                    
+                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=\(enteredIngredient)", dataType: "Ingredients"))
                 } label: {
                     EmptyView()
                 }
                 
                 Button {
-                    if !enteredIngredient.isEmpty {
+                    if !enteredIngredient.isEmpty
+                    {
                         ingredientIsEntered = true
                     }
                     

@@ -17,15 +17,17 @@ struct LettersView: View {
                 .edgesIgnoringSafeArea(.all)
             
             List(letters, id: \.self) { letter in
-                NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)"))) {
-                    Text("\(letter)")
-                        .fontWeight(.bold)
-                }
                 
+                NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)", dataType: "Drinks"))) {
+                    
+                    Text("\(letter)").fontWeight(.bold)
+                    
+                }
             }
         }
     }
 }
+
 
 struct LetterListView_Previews: PreviewProvider {
     static var previews: some View {

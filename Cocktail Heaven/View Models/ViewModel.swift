@@ -9,23 +9,55 @@ import Foundation
 
 class ViewModel {
     
-    let networkManager = NetworkManager()
+    var dataType: String
     var urlString: String
     var drinks: Drinks = Drinks(drinks: [Cocktail]())
+    var ingredients: Ingredients = Ingredients(ingredients: [Ingredient]())
+    var alcohols: Alcohols = Alcohols(drinks: [Alcohol]())
     var dataIsFound: Bool = true
     
-    init(urlString: String) {
+    init(urlString: String, dataType: String) {
         self.urlString = urlString
+        self.dataType = dataType
         FetchData()
     }
     
     func FetchData() {
-    
-        networkManager.fetchData(urlString) { results, error in
-            DispatchQueue.main.async {
-            self.drinks = results
-            self.dataIsFound = !error
+        switch dataType {
+        case "Drinks":
+            let networkManager = NetworkManager<Drinks>()
+            networkManager.fetchData(urlString) { results, error in
+                DispatchQueue.main.async {
+                    guard let resultsSafe = results else { return }
+                    self.drinks = resultsSafe
+                    self.dataIsFound = !error
+                }
             }
+
+        case "Ingredients":
+            let networkManager = NetworkManager<Ingredients>()
+            print(urlString)
+            networkManager.fetchData(urlString) { results, error in
+                
+                DispatchQueue.main.async {
+                    guard let resultsSafe = results else { return }
+                    self.ingredients = resultsSafe
+                    self.dataIsFound = !error
+                }
+            }
+            
+        case "Alcohols":
+            let networkManager = NetworkManager<Alcohols>()
+            networkManager.fetchData(urlString) { results, error in
+                DispatchQueue.main.async {
+                    guard let resultsSafe = results else { return }
+                    self.alcohols = resultsSafe
+                    self.dataIsFound = !error
+                }
+            }
+
+        default:
+            break
         }
     }
     
