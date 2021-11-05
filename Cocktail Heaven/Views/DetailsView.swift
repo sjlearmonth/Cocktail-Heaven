@@ -14,6 +14,7 @@ struct DetailsView: View {
     var viewModel: ViewModel
     
     var body: some View {
+                        
         if viewModel.dataType == "Drinks" {
             
         List(viewModel.drinks.drinks) { cocktail in
@@ -27,8 +28,8 @@ struct DetailsView: View {
                 
                 WebImage(url: URL(string: cocktail.strDrinkThumb))
                     .resizable()
-                    .frame(width: UIScreen.main.bounds.width - 20.0, height: UIScreen.main.bounds.width - 20.0, alignment: .center)
-                
+                    .frame(alignment: .center)
+                    .aspectRatio(contentMode: .fill)
                 
                 Text("~ Ingredients List ~\n").frame(alignment: .center)
                 
@@ -40,9 +41,10 @@ struct DetailsView: View {
                 
                 Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
             }
-            
+            .listRowBackground(Color(.systemTeal))
+            .background(Color(.systemTeal))
         }
-        .foregroundColor(Color.blue)
+        .foregroundColor(Color.white)
         }
         if viewModel.dataType == "Ingredients" {
             
@@ -73,7 +75,6 @@ struct DetailsView: View {
                 .padding()
             }
         }
-
     }
 }
 

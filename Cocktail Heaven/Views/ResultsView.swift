@@ -19,7 +19,6 @@ struct ResultsView: View {
                 .foregroundColor(.black)
                 .listRowBackground(Color.white)
         }
-        
     }
 }
 

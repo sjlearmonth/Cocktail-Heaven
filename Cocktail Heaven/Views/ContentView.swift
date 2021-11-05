@@ -14,11 +14,13 @@ struct ContentView: View {
                 Color(.systemTeal)
                     .edgesIgnoringSafeArea(.all)
                 VStack {
+                    Spacer()
                     Text("Welcome to Cocktail Heaven!")
                         .fontWeight(.regular)
                         .font(.system(size: 25.0))
                         .foregroundColor(.white)
                         .navigationBarHidden(true)
+                    Spacer()
                     Image("cocktailImage")
                         .resizable()
                         .frame(width: 300.0, height: 300.0, alignment: .center)
@@ -34,11 +36,11 @@ struct ContentView: View {
                 }
             }
         }
-        .accentColor(.white)
         .background(UINavigationConfiguration { nc in
                         nc.navigationBar.barTintColor = .systemTeal
                         nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
                     })
+        .accentColor(.black)
     }
 }
 

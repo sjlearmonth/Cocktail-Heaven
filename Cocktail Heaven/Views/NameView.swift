@@ -22,6 +22,7 @@ struct NameView: View {
                     .padding()
                     .foregroundColor(.white)
                     .font(.system(size: 20.0))
+                    .navigationTitle("Search by cocktail name")
                 
                 TextField("Cocktail name", text: $enteredText)
                     .textFieldStyle(.roundedBorder)
@@ -48,7 +49,6 @@ struct NameView: View {
                 }
                 .background(.blue)
                 .clipShape(RoundedRectangle(cornerRadius: 30.0))
-                
             }
         }
     }

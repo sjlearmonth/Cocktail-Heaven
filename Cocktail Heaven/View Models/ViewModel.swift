@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ViewModel {
     
@@ -36,9 +37,7 @@ class ViewModel {
 
         case "Ingredients":
             let networkManager = NetworkManager<Ingredients>()
-            print(urlString)
             networkManager.fetchData(urlString) { results, error in
-                
                 DispatchQueue.main.async {
                     guard let resultsSafe = results else { return }
                     self.ingredients = resultsSafe

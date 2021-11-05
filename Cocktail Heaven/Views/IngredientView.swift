@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IngredientView: View {
     
-    @State var enteredIngredient: String = " "
+    @State var enteredIngredient: String = ""
     @State var ingredientIsEntered: Bool = false
     
     var body: some View {
@@ -27,7 +27,6 @@ struct IngredientView: View {
                 TextField("Ingredient", text: $enteredIngredient)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 250.0, height: 60.0, alignment: .center)
-                    .padding()
                     .foregroundColor(.black)
                 NavigationLink(isActive: $ingredientIsEntered) {
                     DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=\(enteredIngredient)", dataType: "Ingredients"))

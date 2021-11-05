@@ -18,10 +18,8 @@ struct AlcoholView: View {
         ZStack {
             Color(.systemTeal)
                 .edgesIgnoringSafeArea(.all)
-            
             VStack {
-                Text("Please select search by alcoholic or non-alcoholic cocktail")
-                    .padding(50.0)
+                Text("Please select search by alcoholic\nor non-alcoholic cocktail")
                     .foregroundColor(.white)
                     .font(.system(size: 20.0))
                     .navigationTitle("Search by Alcohol Content")
@@ -29,7 +27,7 @@ struct AlcoholView: View {
                 Toggle(isOn: $isAlcoholic) {
                     Text("Alcoholic:").foregroundColor(.white).font(.system(size: 20.0))
                 }
-                .padding(80.0)
+                .padding(EdgeInsets(top: 20.0, leading: 80.0, bottom: 20.0, trailing: 80.0))
                 
                 NavigationLink(isActive: $alcoholicIsSelected) {
                     DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic", dataType: "Alcohols"))

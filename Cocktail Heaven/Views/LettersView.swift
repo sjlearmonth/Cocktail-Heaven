@@ -20,7 +20,9 @@ struct LettersView: View {
                 
                 NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)", dataType: "Drinks"))) {
                     
-                    Text("\(letter)").fontWeight(.bold)
+                    Text("\(letter)")
+                        .fontWeight(.bold)
+                        .navigationTitle("Search by first letter")
                     
                 }
             }
