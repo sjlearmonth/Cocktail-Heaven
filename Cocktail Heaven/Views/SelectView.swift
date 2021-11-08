@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct SelectView: View {
-    @State var resultsIsSelected = false
-    @State var firstLetterIsSelected = false
-    @State var nameIsSelected = false
-    @State var ingredientIsSelected = false
-    @State var alcoholIsSelected = false
+    @State var resultsIsSelected: Bool = false
+    @State var firstLetterIsSelected: Bool = false
+    @State var nameIsSelected: Bool = false
+    @State var ingredientIsSelected: Bool = false
+    @State var alcoholIsSelected: Bool = false
     
     var body: some View {
         ZStack {

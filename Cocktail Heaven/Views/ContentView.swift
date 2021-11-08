@@ -36,30 +36,10 @@ struct ContentView: View {
                 }
             }
         }
-        .background(UINavigationConfiguration { nc in
-                        nc.navigationBar.barTintColor = .systemTeal
-                        nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-                    })
         .accentColor(.black)
     }
 }
 
-struct UINavigationConfiguration: UIViewControllerRepresentable {
-    var config: (UINavigationController) -> Void = {_ in }
-    
-    func makeUIViewController(context: Context) -> UIViewController {
-        let controller = UIViewController()
-        DispatchQueue.main.async {
-            if let nc = controller.navigationController {
-                self.config(nc)
-            }
-        }
-        return controller
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-    }
-}
 
 
 

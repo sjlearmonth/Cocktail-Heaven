@@ -16,6 +16,7 @@ class ViewModel {
     var ingredients: Ingredients = Ingredients(ingredients: [Ingredient]())
     var alcohols: Alcohols = Alcohols(drinks: [Alcohol]())
     var dataIsFound: Bool = true
+    let letters = "abcdefghijklmnopqrstuvwxyz".map { String($0)}
     
     init(urlString: String, dataType: String) {
         self.urlString = urlString
@@ -34,16 +35,36 @@ class ViewModel {
                     self.dataIsFound = !error
                 }
             }
-
+            
         case "Ingredients":
-            let networkManager = NetworkManager<Ingredients>()
-            networkManager.fetchData(urlString) { results, error in
-                DispatchQueue.main.async {
-                    guard let resultsSafe = results else { return }
-                    self.ingredients = resultsSafe
-                    self.dataIsFound = !error
+            let networkManager = NetworkManager<Drinks>()
+            let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
+            
+            // Extract ingredient from the URL
+            var ingredient = urlString.drop { character in
+                return character != "="
+            }
+            ingredient.removeFirst()
+            print(ingredient)
+            // Search cocktails for those with the named ingredient
+            if !ingredient.isEmpty {
+                
+                // Use for-in loop to fetch all the cocktails by first letter
+                for letter in letters {
+                    let url = baseUrl + letter
+                    networkManager.fetchData(String(url)) { results, error in
+                        DispatchQueue.main.async {
+                            guard let resultsSafe = results else { return }
+                            self.drinks.drinks.append(contentsOf: resultsSafe.drinks)
+                            if letter == "z" {
+                                print(self.drinks.drinks.count)
+                            }
+                        }
+                    }
                 }
             }
+            
+            // Return filtered cocktails
             
         case "Alcohols":
             let networkManager = NetworkManager<Alcohols>()
@@ -54,7 +75,7 @@ class ViewModel {
                     self.dataIsFound = !error
                 }
             }
-
+            
         default:
             break
         }
