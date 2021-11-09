@@ -12,53 +12,79 @@ import UIKit
 struct DetailsView: View {
     
     var viewModel: ViewModel
+    @State var errorHasBeenDetected: Bool = false
     
     var body: some View {
-                        
+        
         if viewModel.dataType == "Drinks" {
             
-        List(viewModel.drinks.drinks) { cocktail in
-            VStack(alignment: .center) {
-                HStack(alignment: .center) {
-                    Text(cocktail.strDrink + "  -")
+            List(viewModel.drinks.drinks) { cocktail in
+                VStack(alignment: .center) {
+                    HStack(alignment: .center) {
+                        Text(cocktail.strDrink + "  -")
+                            .frame(alignment: .center)
+                        Text(cocktail.strAlcoholic)
+                            .frame(alignment: .center)
+                    }
+                    
+                    WebImage(url: URL(string: cocktail.strDrinkThumb))
+                        .resizable()
                         .frame(alignment: .center)
-                    Text(cocktail.strAlcoholic)
-                        .frame(alignment: .center)
+                        .aspectRatio(contentMode: .fill)
+                    
+                    Text("~ Ingredients List ~\n").frame(alignment: .center)
+                    
+                    ForEach(viewModel.buildIngredients(cocktail), id: \.self) { ingredient in
+                        Text(ingredient)
+                    }
+                    
+                    Text("\n~ Recipe Instructions ~\n\n")
+                    
+                    Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
                 }
-                
-                WebImage(url: URL(string: cocktail.strDrinkThumb))
-                    .resizable()
-                    .frame(alignment: .center)
-                    .aspectRatio(contentMode: .fill)
-                
-                Text("~ Ingredients List ~\n").frame(alignment: .center)
-                
-                ForEach(viewModel.buildIngredients(cocktail), id: \.self) { ingredient in
-                    Text(ingredient)
-                }
-                
-                Text("\n~ Recipe Instructions ~\n\n")
-                
-                Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
+                .listRowBackground(Color(.systemTeal))
+                .background(Color(.systemTeal))
             }
-            .listRowBackground(Color(.systemTeal))
-            .background(Color(.systemTeal))
-        }
-        .foregroundColor(Color.white)
+            .foregroundColor(Color.white)
         }
         if viewModel.dataType == "Ingredients" {
             
-            List(viewModel.ingredients.ingredients) { ingredient in
-                VStack {
-                    Text("Ingredient: \(ingredient.strIngredient)")
-                    if ingredient.strAlcohol == "Yes" {
-                        Text("Contains alcohol at \(ingredient.strABV ?? "0")% proof")
-                    } else {
-                        Text("Contains no alcohol")
+            Button {
+                errorHasBeenDetected = true
+            } label: {
+                Text("Click me")
+            }
+            
+            List(viewModel.drinks.drinks) { cocktail in
+                VStack(alignment: .center) {
+                    HStack(alignment: .center) {
+                        Text(cocktail.strDrink + "  -")
+                            .frame(alignment: .center)
+                        Text(cocktail.strAlcoholic)
+                            .frame(alignment: .center)
                     }
-                    Text("~ Description ~\n")
-                    Text(ingredient.strDescription).fixedSize(horizontal: false, vertical: true)
+                    
+                    WebImage(url: URL(string: cocktail.strDrinkThumb))
+                        .resizable()
+                        .frame(alignment: .center)
+                        .aspectRatio(contentMode: .fill)
+                    
+                    Text("~ Ingredients List ~\n").frame(alignment: .center)
+                    
+                    ForEach(viewModel.buildIngredients(cocktail), id: \.self) { ingredient in
+                        Text(ingredient)
+                    }
+                    
+                    Text("\n~ Recipe Instructions ~\n\n")
+                    
+                    Text(cocktail.strInstructions + "\n").fixedSize(horizontal: false, vertical: true)
                 }
+                .listRowBackground(Color(.systemTeal))
+                .background(Color(.systemTeal))
+            }
+            .foregroundColor(Color.white)
+            .alert(isPresented: $errorHasBeenDetected) {
+                Alert(title: Text("Error"), message: Text("Cannot Find Information"))
             }
         }
         
@@ -66,7 +92,7 @@ struct DetailsView: View {
             List(viewModel.alcohols.drinks) { alcohol in
                 VStack {
                     Text(" ~ \(alcohol.strDrink) ~ \n")
-
+                    
                     WebImage(url: URL(string: alcohol.strDrinkThumb))
                         .resizable()
                         .frame(alignment: .center)

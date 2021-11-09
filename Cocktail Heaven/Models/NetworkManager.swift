@@ -25,7 +25,7 @@ class NetworkManager<DataStruct: Decodable> {
                         
                         completion(drinkData, true)
                     } else {
-                        print(error.localizedDescription)
+                        print("DEBUG: Error is \(error.localizedDescription)")
                     }
                 }
             }
