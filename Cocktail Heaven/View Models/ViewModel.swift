@@ -83,19 +83,13 @@ class ViewModel {
                                     print("DEBUG: \(ingredient); \(ingredientIsPresent)")
                                     return ingredientIsPresent
                                 }
-                                if cocktails.count > 1 {
-                                    print("DEBUG: strIngredient1 = \(cocktails[0].strIngredient1)")
-                                    print("DEBUG: strIngredient2 = \(cocktails[0].strIngredient2)")
-                                    print("DEBUG: strIngredient3 = \(cocktails[0].strIngredient3)")
-                                    print("DEBUG: strIngredient4 = \(cocktails[0].strIngredient4)")
+                                if cocktails.count > 0 {
                                     self.drinks.drinks = cocktails
                                 }
-                                
                             }
                         }
                     }
                 }
-                
             }
             
         case "Alcohols":

@@ -12,7 +12,6 @@ import UIKit
 struct DetailsView: View {
     
     var viewModel: ViewModel
-    @State var errorHasBeenDetected: Bool = false
     
     var body: some View {
         
@@ -49,12 +48,6 @@ struct DetailsView: View {
         }
         if viewModel.dataType == "Ingredients" {
             
-            Button {
-                errorHasBeenDetected = true
-            } label: {
-                Text("Click me")
-            }
-            
             List(viewModel.drinks.drinks) { cocktail in
                 VStack(alignment: .center) {
                     HStack(alignment: .center) {
@@ -83,9 +76,7 @@ struct DetailsView: View {
                 .background(Color(.systemTeal))
             }
             .foregroundColor(Color.white)
-            .alert(isPresented: $errorHasBeenDetected) {
-                Alert(title: Text("Error"), message: Text("Cannot Find Information"))
-            }
+
         }
         
         if viewModel.dataType == "Alcohols" {
