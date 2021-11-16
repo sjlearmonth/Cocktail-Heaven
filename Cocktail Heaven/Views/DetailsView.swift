@@ -11,7 +11,7 @@ import UIKit
 
 struct DetailsView: View {
     
-    var viewModel: ViewModel
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         
@@ -45,9 +45,13 @@ struct DetailsView: View {
                 .background(Color(.systemTeal))
             }
             .foregroundColor(Color.white)
+            .alert(isPresented: $viewModel.dataIsNotFound) {
+                Alert(title: Text("Error"), message: Text("Cannot find any information. Please try again."), dismissButton: .cancel())
+            }
+
         }
+        
         if viewModel.dataType == "Ingredients" {
-            
             List(viewModel.drinks.drinks) { cocktail in
                 VStack(alignment: .center) {
                     HStack(alignment: .center) {
@@ -76,7 +80,9 @@ struct DetailsView: View {
                 .background(Color(.systemTeal))
             }
             .foregroundColor(Color.white)
-
+            .alert(isPresented: $viewModel.dataIsNotFound) {
+                Alert(title: Text("Error"), message: Text("Cannot find any information. Please try again."), dismissButton: .cancel())
+            }
         }
         
         if viewModel.dataType == "Alcohols" {
@@ -90,6 +96,9 @@ struct DetailsView: View {
                         .aspectRatio(1.0, contentMode: .fill)
                 }
                 .padding()
+            }
+            .alert(isPresented: $viewModel.dataIsNotFound) {
+                Alert(title: Text("Error"), message: Text("Cannot find any information. Please try again."), dismissButton: .cancel())
             }
         }
     }

@@ -30,17 +30,21 @@ struct AlcoholView: View {
                 .padding(EdgeInsets(top: 20.0, leading: 80.0, bottom: 20.0, trailing: 80.0))
                 
                 NavigationLink(isActive: $alcoholicIsSelected) {
-                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic", dataType: "Alcohols"))
+                    if alcoholicIsSelected {
+                        DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic", dataType: "Alcohols"))
+                    }
                 } label: {
                     EmptyView()
                 }
                 
                 NavigationLink(isActive: $nonAlcoholicIsSelected) {
-                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic", dataType: "Alcohols"))
+                    if nonAlcoholicIsSelected {
+                        DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic", dataType: "Alcohols"))
+                    }
                 } label: {
                     EmptyView()
                 }
-
+                
                 
                 Button {
                     if isAlcoholic {
@@ -60,8 +64,6 @@ struct AlcoholView: View {
                 }
                 .background(.blue)
                 .clipShape(RoundedRectangle(cornerRadius: 30.0))
-
-                
             }
         }
     }

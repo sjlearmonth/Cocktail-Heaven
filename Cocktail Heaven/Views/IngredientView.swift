@@ -29,7 +29,9 @@ struct IngredientView: View {
                     .frame(width: 250.0, height: 60.0, alignment: .center)
                     .foregroundColor(.black)
                 NavigationLink(isActive: $ingredientIsEntered) {
+                    if ingredientIsEntered {
                     DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=\(enteredIngredient)", dataType: "Ingredients"))
+                    }
                 } label: {
                     EmptyView()
                 }

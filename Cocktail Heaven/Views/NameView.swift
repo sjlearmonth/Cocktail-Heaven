@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NameView: View {
     
-    @State var enteredText: String = ""
+    @State var enteredName: String = ""
     @State var nameIsEntered: Bool = false
     
     var body: some View {
@@ -24,19 +24,21 @@ struct NameView: View {
                     .font(.system(size: 20.0))
                     .navigationTitle("Search by cocktail name")
                 
-                TextField("Cocktail name", text: $enteredText)
+                TextField("Cocktail name", text: $enteredName)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 250.0, height: 60.0, alignment: .center)
                     .padding()
                     .foregroundColor(.black)
                 NavigationLink(isActive: $nameIsEntered) {
-                    DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredText)", dataType: "Drinks"))
+                    if nameIsEntered {
+                        DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=\(enteredName)", dataType: "Drinks"))
+                    }
                 } label: {
                     EmptyView()
                 }
                 
                 Button {
-                    if !enteredText.isEmpty {
+                    if !enteredName.isEmpty {
                         nameIsEntered = true
                     }
                     

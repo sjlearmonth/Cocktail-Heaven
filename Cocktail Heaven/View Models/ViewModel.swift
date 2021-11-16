@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-class ViewModel {
+class ViewModel: ObservableObject {
     
     var dataType: String
     var urlString: String
-    var drinks: Drinks = Drinks(drinks: [Cocktail]())
+    @Published var drinks: Drinks = Drinks(drinks: [Cocktail]())
     var ingredients: Ingredients = Ingredients(ingredients: [Ingredient]())
     var alcohols: Alcohols = Alcohols(drinks: [Alcohol]())
-    var dataIsFound: Bool = true
+    @Published var dataIsNotFound: Bool = false
     
     init(urlString: String, dataType: String) {
         self.urlString = urlString
@@ -29,9 +29,13 @@ class ViewModel {
             let networkManager = NetworkManager<Drinks>()
             networkManager.fetchData(urlString) { results, error in
                 DispatchQueue.main.async {
-                    guard let resultsSafe = results else { return }
-                    self.drinks = resultsSafe
-                    self.dataIsFound = !error
+                    if let resultsSafe = results {
+                        self.drinks = resultsSafe
+                        self.dataIsNotFound = error
+                    } else {
+                        self.drinks.drinks = []
+                        self.dataIsNotFound = true
+                    }
                 }
             }
             
@@ -45,7 +49,6 @@ class ViewModel {
                 return character != "="
             }
             ingredient.removeFirst()
-            print("DEBUG: \(ingredient)")
             
             //             Search cocktails for those with the named ingredient
             if !ingredient.isEmpty {
@@ -58,11 +61,9 @@ class ViewModel {
                     networkManager.fetchData(String(url)) { results, error in
                         DispatchQueue.main.async {
                             guard let resultsSafe = results else { callCount += 1;
-                                                                   self.dataIsFound = self.dataIsFound && error;
-                                                                   return }
+                                return }
                             self.drinks.drinks.append(contentsOf: resultsSafe.drinks)
                             callCount += 1
-                            self.dataIsFound = self.dataIsFound && error
                             if callCount == 26 {
                                 
                                 // Return filtered cocktails
@@ -85,6 +86,13 @@ class ViewModel {
                                 }
                                 if cocktails.count > 0 {
                                     self.drinks.drinks = cocktails
+                                    //                                    print("DEBUG: cocktails[0].strIngredient1 = \(cocktails[0].strIngredient1)")
+                                    //                                    print("DEBUG: cocktails[0].strIngredient2 = \(cocktails[0].strIngredient2)")
+                                    //                                    print("DEBUG: cocktails[0].strIngredient3 = \(cocktails[0].strIngredient3)")
+                                    //                                    print("DEBUG: cocktails[0].strIngredient4 = \(cocktails[0].strIngredient4)")
+                                } else {
+                                    self.drinks.drinks = []
+                                    self.dataIsNotFound = true
                                 }
                             }
                         }
@@ -98,7 +106,7 @@ class ViewModel {
                 DispatchQueue.main.async {
                     guard let resultsSafe = results else { return }
                     self.alcohols = resultsSafe
-                    self.dataIsFound = !error
+                    self.dataIsNotFound = error
                 }
             }
             
