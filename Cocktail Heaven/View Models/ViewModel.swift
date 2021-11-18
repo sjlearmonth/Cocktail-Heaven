@@ -49,6 +49,7 @@ class ViewModel: ObservableObject {
                 return character != "="
             }
             ingredient.removeFirst()
+            print("DEBUG: Got here.")
             
             //             Search cocktails for those with the named ingredient
             if !ingredient.isEmpty {
