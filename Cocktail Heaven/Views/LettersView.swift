@@ -18,17 +18,25 @@ struct LettersView: View {
             
             List(letters, id: \.self) { letter in
                 
-                NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)", dataType: "Drinks"))) {
-                    
+                NavigationLink {
+                    DetailsView(searchType: .letter(letter))
+                } label: {
                     Text("\(letter)")
                         .fontWeight(.bold)
                         .navigationTitle("Search by first letter")
-                    
                 }
+                
+                //                NavigationLink(destination: DetailsView(viewModel: ViewModel(urlString: "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(letter)", dataType: "Drinks"))) {
+                
+                //                    Text("\(letter)")
+                //                        .fontWeight(.bold)
+                //                        .navigationTitle("Search by first letter")
+                //
             }
         }
     }
 }
+
 
 
 struct LetterListView_Previews: PreviewProvider {

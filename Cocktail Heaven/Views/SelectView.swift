@@ -7,6 +7,13 @@
 
 import SwiftUI
 
+enum SearchType {
+    case letter(String)
+    case name(String)
+    case ingredient(String)
+    case alcohol(Bool)
+}
+
 struct SelectView: View {
     @State var resultsIsSelected: Bool = false
     @State var firstLetterIsSelected: Bool = false

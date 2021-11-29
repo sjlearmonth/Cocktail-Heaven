@@ -10,22 +10,23 @@ import UIKit
 
 class ViewModel: ObservableObject {
     
-    var dataType: String
-    var urlString: String
-    @Published var drinks: Drinks = Drinks(drinks: [Cocktail]())
-    var ingredients: Ingredients = Ingredients(ingredients: [Ingredient]())
-    var alcohols: Alcohols = Alcohols(drinks: [Alcohol]())
-    @Published var dataIsNotFound: Bool = false
+    let searchType: SearchType
     
-    init(urlString: String, dataType: String) {
-        self.urlString = urlString
-        self.dataType = dataType
-        FetchData()
+//    @Published var drinks: Drinks = Drinks(drinks: [Cocktail]())
+//    var ingredients: Ingredients = Ingredients(ingredients: [Ingredient]())
+//    var alcohols: Alcohols = Alcohols(drinks: [Alcohol]())
+//    @Published var dataIsNotFound: Bool = false
+        
+    init(searchType: SearchType) {
+        self.searchType = searchType
     }
     
-    func FetchData() {
-        switch dataType {
-        case "Drinks":
+    func FetchCocktailInformation() {
+        
+        switch searchType {
+            
+        case .letter(let firstLetter):
+            let urlString = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=\(firstLetter)"
             let networkManager = NetworkManager<Drinks>()
             networkManager.fetchData(urlString) { results, error in
                 DispatchQueue.main.async {
@@ -37,84 +38,107 @@ class ViewModel: ObservableObject {
                         self.dataIsNotFound = true
                     }
                 }
-            }
-            
-        case "Ingredients":
-            let networkManager = NetworkManager<Drinks>()
-            let letters = "abcdefghijklmnopqrstuvwxyz".map { String($0) }
-            let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
-            
-            // Extract ingredient from the URL
-            var ingredient = urlString.drop { character in
-                return character != "="
-            }
-            ingredient.removeFirst()
-            print("DEBUG: Got here.")
-            
-            //             Search cocktails for those with the named ingredient
-            if !ingredient.isEmpty {
-                var callCount = 0
-                
-                // Use for-in loop to fetch all the cocktails by first letter
-                self.drinks = Drinks(drinks: [Cocktail]())
-                for letter in letters {
-                    let url = baseUrl + letter
-                    networkManager.fetchData(String(url)) { results, error in
-                        DispatchQueue.main.async {
-                            guard let resultsSafe = results else { callCount += 1;
-                                return }
-                            self.drinks.drinks.append(contentsOf: resultsSafe.drinks)
-                            callCount += 1
-                            if callCount == 26 {
-                                
-                                // Return filtered cocktails
-                                let cocktails = self.drinks.drinks.filter { cocktail in
-                                    let ingredientIsPresent =
-                                    cocktail.strIngredient1?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient2?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient3?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient4?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient5?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient6?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient7?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient8?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient9?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient10?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient11?.contains(ingredient) ?? false ||
-                                    cocktail.strIngredient12?.contains(ingredient) ?? false
-                                    print("DEBUG: \(ingredient); \(ingredientIsPresent)")
-                                    return ingredientIsPresent
-                                }
-                                if cocktails.count > 0 {
-                                    self.drinks.drinks = cocktails
-                                    //                                    print("DEBUG: cocktails[0].strIngredient1 = \(cocktails[0].strIngredient1)")
-                                    //                                    print("DEBUG: cocktails[0].strIngredient2 = \(cocktails[0].strIngredient2)")
-                                    //                                    print("DEBUG: cocktails[0].strIngredient3 = \(cocktails[0].strIngredient3)")
-                                    //                                    print("DEBUG: cocktails[0].strIngredient4 = \(cocktails[0].strIngredient4)")
-                                } else {
-                                    self.drinks.drinks = []
-                                    self.dataIsNotFound = true
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            
-        case "Alcohols":
-            let networkManager = NetworkManager<Alcohols>()
-            networkManager.fetchData(urlString) { results, error in
-                DispatchQueue.main.async {
-                    guard let resultsSafe = results else { return }
-                    self.alcohols = resultsSafe
-                    self.dataIsNotFound = error
-                }
-            }
-            
+
+            break
+        case .name(let cocktailName):
+            break
+        case .ingredient(let cocktailIngredient):
+            break
+        case .alcohol(let isPresent):
+            break
         default:
             break
         }
-    }
+//        case "Drinks":
+//            let networkManager = NetworkManager<Drinks>()
+//            networkManager.fetchData(urlString) { results, error in
+//                DispatchQueue.main.async {
+//                    if let resultsSafe = results {
+//                        self.drinks = resultsSafe
+//                        self.dataIsNotFound = error
+//                    } else {
+//                        self.drinks.drinks = []
+//                        self.dataIsNotFound = true
+//                    }
+//                }
+//            }
+//
+//        case "Ingredients":
+//            let networkManager = NetworkManager<Drinks>()
+//            let letters = "abcdefghijklmnopqrstuvwxyz".map { String($0) }
+//            let baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
+//
+//            // Extract ingredient from the URL
+//            var ingredient = urlString.drop { character in
+//                return character != "="
+//            }
+//            ingredient.removeFirst()
+//            print("DEBUG: Got here. Ingredient is \(ingredient)")
+//
+//            //             Search cocktails for those with the named ingredient
+//            if !ingredient.isEmpty {
+//                var callCount = 0
+//
+//                // Use for-in loop to fetch all the cocktails by first letter
+//                self.drinks = Drinks(drinks: [Cocktail]())
+//                for letter in letters {
+//                    let url = baseUrl + letter
+//                    networkManager.fetchData(String(url)) { results, error in
+//                        DispatchQueue.main.async {
+//                            guard let resultsSafe = results else { callCount += 1;
+//                                return }
+//                            self.drinks.drinks.append(contentsOf: resultsSafe.drinks)
+//                            callCount += 1
+//                            if callCount == 26 {
+//
+//                                // Return filtered cocktails
+//                                let cocktails = self.drinks.drinks.filter { cocktail in
+//                                    let ingredientIsPresent =
+//                                    cocktail.strIngredient1?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient2?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient3?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient4?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient5?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient6?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient7?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient8?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient9?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient10?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient11?.contains(ingredient) ?? false ||
+//                                    cocktail.strIngredient12?.contains(ingredient) ?? false
+////                                    print("DEBUG: \(ingredient); \(ingredientIsPresent)")
+//                                    return ingredientIsPresent
+//                                }
+//                                if cocktails.count > 0 {
+//                                    self.drinks.drinks = cocktails
+//                                    //                                    print("DEBUG: cocktails[0].strIngredient1 = \(cocktails[0].strIngredient1)")
+//                                    //                                    print("DEBUG: cocktails[0].strIngredient2 = \(cocktails[0].strIngredient2)")
+//                                    //                                    print("DEBUG: cocktails[0].strIngredient3 = \(cocktails[0].strIngredient3)")
+//                                    //                                    print("DEBUG: cocktails[0].strIngredient4 = \(cocktails[0].strIngredient4)")
+//                                } else {
+//                                    self.drinks.drinks = []
+//                                    self.dataIsNotFound = true
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//        case "Alcohols":
+//            let networkManager = NetworkManager<Alcohols>()
+//            networkManager.fetchData(urlString) { results, error in
+//                DispatchQueue.main.async {
+//                    guard let resultsSafe = results else { return }
+//                    self.alcohols = resultsSafe
+//                    self.dataIsNotFound = error
+//                }
+//            }
+//
+//        default:
+//            break
+//        }
+  b  }
     
     
     func buildIngredients(_ cocktail: Cocktail) -> [String] {
