@@ -19,7 +19,7 @@ struct DetailsView: View {
             
             let viewModel = ViewModel(searchType: .name(cocktailName))
             
-            viewModel.FetchCocktailInformation()
+            let cocktailDrinks: Drinks? = viewModel.FetchCocktailInformation()
             
         } else if case .letter(let firstLetter) = searchType {
             

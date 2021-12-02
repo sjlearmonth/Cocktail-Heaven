@@ -9,7 +9,7 @@ import Foundation
 
 class NetworkManager<DataStruct: Decodable> {
         
-    func fetchData(_ urlString: String, completion: @escaping (DataStruct?, Bool) -> Void) {
+    func fetchData(_ urlString: String, completion: @escaping (DataStruct?, Error?) -> Void) {
         guard let url = URL(string: urlString) else { return }
         var drinkData: DataStruct?
         let session = URLSession(configuration: .default)
@@ -19,11 +19,10 @@ class NetworkManager<DataStruct: Decodable> {
                 guard let safeData = data else { return }
                 do {
                     drinkData = try decoder.decode(DataStruct.self, from: safeData)
-                        completion(drinkData!, false)
-                } catch let error {
+                        completion(drinkData, error)
+                } catch {
                     if error.localizedDescription == "The data couldn’t be read because it is missing." {
-                        
-                        completion(drinkData, true)
+                        completion(drinkData, error)
                     } else {
                         print("DEBUG: Error is \(error.localizedDescription)")
                     }
